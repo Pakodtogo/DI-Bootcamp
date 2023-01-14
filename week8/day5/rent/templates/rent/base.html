@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentals Management System</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+    
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a href="{% url 'index' %}" class="navbar-brand"><i class="fa-solid fa-layer-group fa-lg"></i>
+               </i> Rentals Management System
+           </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    
+                    <li class="nav-item">
+                        <a href="{% url 'rental' %}" class="nav-link"><i class="fa-solid fa-list fa-lg"></i> ALL RENTALS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'rental_add' %}" class="nav-link"><i class="fa-solid fa-plus fa-lg"></i> ADD RENTALS</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'vehicle' %}" class="nav-link"><i class="fa-solid fa-list fa-lg"></i> ALL VEHICLES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'vehicle_add' %}" class="nav-link"><i class="fa-solid fa-plus fa-lg"></i> ADD VEHICLES</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'costumer' %}" class="nav-link"><i class="fa-solid fa-list fa-lg"></i> ALL COSTUMER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'costumer_add' %}" class="nav-link"><i class="fa-solid fa-plus fa-lg"></i> ADD COSTUMER</a>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        {% block body %}
+        {% endblock %}
+    </div>
+    
+    <footer class="m-auto m-4">
+        <div class="text-center">
+            <span>
+                Copyright &copy; <script>document.write(new Date().getFullYear())</script> By Wendpanga Joel PAKODTOGO
+            </span>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

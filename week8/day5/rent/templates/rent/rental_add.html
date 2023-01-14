@@ -1,0 +1,57 @@
+{% extends "rent/base.html" %}
+
+{% block body %}
+<h3 class="text-center m-4">Add Rentals</h3>
+{% if success %}
+   <div class="alert alert-success" role="alert">
+    New Rental added successfully!!!!
+    <a href="{% url 'index' %}" class="alert-link">Go to Home page</a>
+   </div>
+{% else %}
+   <div class="col-6">
+    <div class="card border-light mb-3">
+        <div class="card-header">
+            <i class="fa-solid fa-address-card fa-lg"></i> Rentals Registration
+        </div>
+        <div class="card-body">
+          <form action="{% url 'rental_add' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group row">
+              <label for="costumer" class="form-label mt-4">Costumer ID</label>
+              <select class="form-select" id="exampleSelect1" name="costumer" required>
+                  {% for client in costum %}
+                   <option value='{{client.id }}'>{{ client.id }}</option>
+                 {% endfor %}
+              </select>
+           </div>
+
+           <div class="form-group row">
+            <label for="vehicle" class="form-label mt-4">Vehicule ID</label>
+            <select class="form-select" id="exampleSelect1" name="vehicle" required>
+              {% for vehi in vehicl %}
+               <option value='{{vehi.id }}'>{{ vehi.vtype }}</option>
+             {% endfor %}
+          </select>
+            
+          </div>
+
+          <div class="form-group row">
+            <label for="rentdate" class="form-label mt-4">Rental Date</label>
+            <input type="date" class="form-control" name="rentaldate" required>
+            
+          </div>
+          <div class="form-group row">
+            <label for="returndate" class="form-label mt-4">Return Date</label>
+            <input type="date" class="form-control" name="returndate" required>
+            
+          </div>
+          
+            <button type="submit" class="btn btn-primary mt-4">Add</button>
+            <a href="{% url 'index' %}" class="btn btn-secondary mt-4">Cancel</a>
+          </form>
+        </div>
+      </div>
+   </div>
+{% endif %}
+{% endblock %}

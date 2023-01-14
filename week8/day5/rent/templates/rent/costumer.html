@@ -1,0 +1,114 @@
+{% extends "rent/base.html" %}
+
+{% block body %}
+
+    <h3 class="text-center m-2 m-2 m-2 m-2">Liste of all Costumers</h3>
+    <div class="row">
+        <div class="col-12">
+            {% if costumers %}
+            <div class="card bg-light mb-3 m-4 m-4 m-4">
+                <div class="card-header">Costumers Records</div>
+                <div class="card-body">
+                
+                  <p class="card-text">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">First name</th>
+                                <th scope="col">Last name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone number</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for costumer in costumers %}
+                               <tr>
+                                  <td>{{ costumer.id }}</td>
+                                  <td>{{ costumer.firstname}}</td>
+                                  <td>{{ costumer.lastname}}</td>
+                                  <td>{{ costumer.email}}</td>
+                                  <td>{{ costumer.phonenumber}}</td>
+                                  <td>{{ costumer.address}}</td>
+                                  <td>{{ costumer.city}}</td>
+                                  <td>{{ costumer.country}}</td>
+                                  <td>
+                                    <button class="btn btn-success m-1" type="button" href="{% url 'costumer_details' costumer.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{ costumer.id }}">
+                                        <i class="fa-solid fa-circle-info fa-lg"></i>
+                                    </button>
+                                    <div class="modal" id="myModal{{ costumer.id }}" tabindex="-1" aria-labelledby="myModallabel1" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">
+                                                Costumer ID: {{ costumer.id}}
+                                              </h4>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="list-unstyled">
+                                                   <li>First Name: <strong>{{ costumer.firstname}}</strong></li>
+                                                   <li>Last Name: <strong>{{ costumer.lastname}}</strong></li>
+                                                   <li>Email: <strong>{{ costumer.email}}</strong></li>
+                                                   <li>Phone numer: <strong>{{ costumer.phonenumber}}</strong></li>
+                                                   <li>Address: <strong>{{ costumer.address}}</strong></li>
+                                                   <li>City: <strong>{{ costumer.city}}</strong></li>
+                                                   <li>Country: <strong>{{ costumer.country}}</strong></li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <button class="btn btn-danger m-1" type="button" href="{% url 'costumer_delete' costumer.id %}" data-bs-toggle="modal" data-bs-target="#delete{{ costumer.id }}">
+                                        <i class="fa-solid fa-trash-can fa-lg"></i>
+                                      </button>
+
+                                      <div class="modal" id="delete{{ costumer.id }}" tabindex="-1" aria-labelledby="deletelabel1" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title">
+                                                Costumer ID : {{ costumer.id}}
+                                              </h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p>Are you sure you want to delete {{ costumer.firstname}} {{ costumer.lastname}} ???</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="{% url 'costumer_delete' costumer.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="submit" class="btn btn-primary" value="delete">
+                                                </form>
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </td>
+                               </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                  </p>
+                </div>
+            </div>
+            {% else %}
+              <h5 class="alert alert-primary m-4 m-4"> No Costumer recorded!!!</h5>
+            {% endif %}               
+        </div>
+    </div>
+    {% endblock %}

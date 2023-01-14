@@ -1,0 +1,79 @@
+{% extends "rent/base.html" %}
+
+{% block body %}
+
+    <h3 class="text-center m-2 m-2 m-2 m-2">Liste of all Vehicles</h3>
+    <div class="row">
+        <div class="col-12">
+            {% if vehicles %}
+            <div class="card bg-light mb-3 m-4 m-4 m-4">
+                <div class="card-header">Vehicles Records</div>
+                <div class="card-body">
+                
+                  <p class="card-text">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Vehicle Type</th>
+                                <th scope="col">Vehicle Size</th>
+                                <th scope="col">Created on</th>
+                                <th scope="col">Real Cost</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vehicle in vehicles %}
+                               <tr>
+                                  
+                                  <td>{{ vehicle.vtype}}</td>
+                                  <td>{{ vehicle.vsize}}</td>
+                                  <td>{{ vehicle.datecreated}}</td>
+                                  <td>{{ vehicle.realcost}} USD</td>
+                                  
+                                  <td>
+                                    <button class="btn btn-success m-1" type="button" href="{% url 'vehicle_details' vehicle.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{ vehicle.id }}">
+                                        <i class="fa-solid fa-circle-info fa-lg"></i>
+                                    </button>
+                                    <div class="modal" id="myModal{{ vehicle.id }}" tabindex="-1" aria-labelledby="myModallabel1" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title">
+                                                Vehicle:{{ vehicle.vsize}} {{ vehicle.vtype}}
+                                              </h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <ul class="list-unstyled">
+                                                <li>Vehicle Type: <strong>{{ vehicle.vtype}}</strong></li>
+                                                <li>Vehicle Size: <strong>{{ vehicle.vsize}}</strong></li>
+                                                <li>Created on: <strong>{{ vehicle.datecreated}}</strong></li>
+                                                <li>Real Cost: <strong>{{ vehicle.realcost}} USD</strong></li>
+                                                
+                                              </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                  </td>
+                               </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                  </p>
+                </div>
+            </div>
+            {% else %}
+              <h5 class="alert alert-primary m-4 m-4"> No Vehicle recorded!!!</h5>
+            {% endif %}               
+        </div>
+    </div>
+    {% endblock %}

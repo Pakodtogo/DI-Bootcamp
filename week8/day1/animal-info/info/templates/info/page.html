@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals</title>
+</head>
+<body>
+    <h1>Animals list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Legs</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Speed</th>
+                <th>Family</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in animals %}
+               <tr>
+                <th>{{ x.id }}</th>
+                <th>{{ x.name }}</th>
+                <th>{{ x.legs }}</th>
+                <th>{{ x.weight }}</th>
+                <th>{{ x.height }}</th>
+                <th>{{ x.speed }}</th>
+                <th>{{ x.family }}</th>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

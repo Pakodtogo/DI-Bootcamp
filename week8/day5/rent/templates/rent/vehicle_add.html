@@ -1,0 +1,51 @@
+{% extends "rent/base.html" %}
+{% block body %}
+<h3 class="text-center m-4">Add Vehicles</h3>
+{% if success %}
+   <div class="alert alert-success" role="alert">
+    New Vehicle added successfully!!!!
+    <a href="{% url 'index' %}" class="alert-link">Go to Home page</a>
+   </div>
+{% else %}
+   <div class="col-6">
+    <div class="card border-light mb-3">
+        <div class="card-header">
+            <i class="fa-solid fa-address-card fa-lg"></i> Vehicles Registration
+        </div>
+        <div class="card-body">
+          <form action="{% url 'vehicle_add' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group row">
+              <label for="vtype" class="form-label mt-4">Vehicle Type</label>
+              <select class="form-select" id="exampleSelect1" name="vtype" required>
+                {% for typ in type %}
+                 <option value='{{typ.id }}'>{{ typ.tname }}</option>
+               {% endfor %}
+            </select>     
+           </div>
+           <div class="form-group row">
+            <label for="size" class="form-label mt-4">Vehicle Size</label>
+            <select class="form-select" id="exampleSelect1" name="vsize" required>
+                {% for sis in sise %}
+                 <option value='{{sis.id }}'>{{ sis.sname }}</option>
+               {% endfor %}
+            </select>
+           </div>
+           <div class="form-group row">
+            <label for="datecreated" class="form-label mt-4">Creation Date</label>
+            <input type="date" class="form-control" name="datecreated" placeholder="Creation Date" required>         
+           </div>
+           <div class="form-group row">
+            <label for="realcost" class="form-label mt-4">Real Cost</label>
+            <input type="number" class="form-control" name="realcost" placeholder="price in $" required>         
+           </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Add</button>
+            <a href="{% url 'vehicle' %}" class="btn btn-secondary mt-4">Cancel</a>
+          </form>
+        </div>
+      </div>
+   </div>
+{% endif %}
+{% endblock %}
